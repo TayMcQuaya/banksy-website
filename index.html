@@ -5,30 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BANKSY→SPACE</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.cdnfonts.com/css/tag" rel="stylesheet">
 </head>
 <body>
-    <!-- Enhanced Stars Animation -->
-    <div class="stars-container">
-        <div class="stars-wrapper">
-            <div class="stars"></div>
-            <div class="stars"></div>
+    <div class="space-environment">
+        <div class="stars-container">
+            <div class="stars-wrapper">
+                <div class="stars"></div>
+                <div class="stars"></div>
+            </div>
+            <div class="stars-wrapper">
+                <div class="stars2"></div>
+                <div class="stars2"></div>
+            </div>
+            <div class="stars-wrapper">
+                <div class="stars3"></div>
+                <div class="stars3"></div>
+            </div>
         </div>
-        <div class="stars-wrapper">
-            <div class="stars2"></div>
-            <div class="stars2"></div>
-        </div>
-        <div class="stars-wrapper">
-            <div class="stars3"></div>
-            <div class="stars3"></div>
-        </div>
+        <div class="nebula-effect"></div>
+        <div class="space-particles"></div>
     </div>
 
-    <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
-            <div class="logo">
-                BANKSY→SPACE
-                <div class="logo-glitch" aria-hidden="true">BANKSY→SPACE</div>
+            <div class="logo-container">
+                <div class="logo">BANKSY→SPACE</div>
             </div>
             <div class="nav-links">
                 <a href="#mission" class="nav-link">Mission</a>
@@ -38,327 +40,327 @@
         </div>
     </nav>
 
-    <!-- Hero Section with Enhanced Floating Artwork -->
     <section class="hero">
-        <div class="floating-artwork">
-            <svg class="concrete-block" viewBox="0 0 400 600">
-                <defs>
-                    <!-- Enhanced concrete texture -->
-                    <pattern id="concrete-texture" patternUnits="userSpaceOnUse" width="50" height="50">
-                        <rect width="50" height="50" fill="#4a4a4a"/>
-                        <circle cx="25" cy="25" r="20" fill="#424242"/>
-                        <circle cx="10" cy="10" r="8" fill="#383838" opacity="0.4"/>
-                        <circle cx="40" cy="40" r="6" fill="#383838" opacity="0.4"/>
-                    </pattern>
-                    
-                    <!-- Enhanced shadow effect -->
-                    <filter id="floating-shadow">
-                        <feGaussianBlur in="SourceAlpha" stdDeviation="15"/>
-                        <feOffset dx="0" dy="20" result="offsetblur"/>
-                        <feFlood flood-color="rgba(0,0,0,0.5)"/>
-                        <feComposite in2="offsetblur" operator="in"/>
-                        <feMerge>
-                            <feMergeNode/>
-                            <feMergeNode in="SourceGraphic"/>
-                        </feMerge>
-                    </filter>
-                    
-                    <!-- Spray paint texture -->
-                    <filter id="spray-paint">
-                        <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="1"/>
-                        <feDisplacementMap in="SourceGraphic" scale="2"/>
-                    </filter>
-                </defs>
-
-                <!-- Floating block with enhanced detail -->
-                <g class="block" filter="url(#floating-shadow)">
-                    <rect x="50" y="100" width="300" height="400" fill="url(#concrete-texture)" rx="15"/>
-                    
-                    <!-- Enhanced Spy Booth Artwork -->
-                    <g class="spy-booth-art">
-                        <!-- Phone booth frame -->
-                        <rect x="85" y="130" width="230" height="340" fill="#1a1a1a" rx="10"/>
-                        <rect x="100" y="150" width="200" height="300" fill="none" stroke="#2a2a2a" stroke-width="4"/>
-                        
-                        <!-- Windows -->
-                        <rect x="110" y="170" width="180" height="260" fill="#151515" stroke="#333" stroke-width="2"/>
-                        <line x1="200" y1="170" x2="200" y2="430" stroke="#333" stroke-width="2"/>
-                        
-                        <!-- Spy figures with better detail -->
-                        <g class="spy-figures">
-                            <!-- Left figure -->
-                            <path class="figure" d="M140,300 C150,270 170,280 180,300" stroke="#fff" fill="none" stroke-width="3"/>
-                            <circle cx="160" cy="260" r="15" fill="#fff"/> <!-- Head -->
-                            <rect x="155" y="280" width="10" height="30" fill="#fff"/> <!-- Body -->
-                            
-                            <!-- Right figure -->
-                            <path class="figure" d="M220,300 C230,270 250,280 260,300" stroke="#fff" fill="none" stroke-width="3"/>
-                            <circle cx="240" cy="260" r="15" fill="#fff"/> <!-- Head -->
-                            <rect x="235" y="280" width="10" height="30" fill="#fff"/> <!-- Body -->
-                        </g>
-                        
-                        <!-- Phone booth details -->
-                        <rect x="95" y="140" width="210" height="320" fill="none" stroke="#444" stroke-width="1"/>
-                        <rect x="90" y="135" width="220" height="330" fill="none" stroke="#444" stroke-width="1"/>
-                    </g>
-                </g>
-            </svg>
+        <div class="hero-background">
+            <div class="street-art-overlay"></div>
+            <div class="space-glow"></div>
         </div>
+        
+        <div class="hero-content-wrapper">
+            <div class="floating-artwork">
+                <svg class="concrete-block" viewBox="0 0 400 600">
+                    <defs>
+                        <linearGradient id="concrete" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#4a4a4a"/>
+                            <stop offset="100%" stop-color="#333333"/>
+                        </linearGradient>
+                        <filter id="floating-shadow">
+                            <feGaussianBlur in="SourceAlpha" stdDeviation="15"/>
+                            <feOffset dx="0" dy="20" result="offsetblur"/>
+                            <feComponentTransfer>
+                                <feFuncA type="linear" slope="0.5"/>
+                            </feComponentTransfer>
+                            <feMerge>
+                                <feMergeNode/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
 
-        <div class="hero-content">
-            <h1 class="stencil-text">
-                <span class="text-line">A New Era for Art.</span>
-                <span class="text-line">A New Frontier for Memes.</span>
-            </h1>
-            <p class="subheadline">BANKSY-TO-THE-MOON (Spy Booth) – The Coin That's Ready to Break Boundaries</p>
-            <div class="cta-wrapper">
-                <button class="cta-button">
-                    Get Involved – Watch History Unfold
-                    <div class="button-effect"></div>
-                </button>
-                <div class="cta-links">
-                    <a href="#buy" class="cta-link">Buy Token</a>
-                    <a href="#community" class="cta-link">Join Community</a>
+                    <g class="block" filter="url(#floating-shadow)">
+                        <rect x="50" y="100" width="300" height="400" fill="url(#concrete)" rx="15"/>
+                        <g class="spy-booth-art">
+                            <rect x="85" y="130" width="230" height="340" fill="#1a1a1a" rx="10"/>
+                            <rect x="100" y="150" width="200" height="300" fill="none" stroke="#2a2a2a" stroke-width="4"/>
+                            <rect x="110" y="170" width="180" height="260" fill="#151515"/>
+                            <g class="spy-figures">
+                                <g class="spy-figure">
+                                    <circle cx="160" cy="260" r="15" fill="#fff"/>
+                                    <rect x="155" y="275" width="10" height="35" fill="#fff"/>
+                                    <circle cx="165" cy="255" r="2" fill="#ef4444"/>
+                                </g>
+                                <g class="spy-figure">
+                                    <circle cx="240" cy="260" r="15" fill="#fff"/>
+                                    <rect x="235" y="275" width="10" height="35" fill="#fff"/>
+                                    <circle cx="245" cy="255" r="2" fill="#ef4444"/>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="hero-content">
+                <h1 class="stencil-text">
+                    <span class="text-line-1">A New Era for Art.</span>
+                    <span class="text-line-2">A New Frontier for Memes.</span>
+                </h1>
+                <p class="subheadline">BANKSY-TO-THE-MOON (Spy Booth) – The Coin That's Ready to Break Boundaries</p>
+                <div class="cta-container">
+                    <button class="cta-button">
+                        Get Involved – Watch History Unfold
+                        <span class="button-overlay"></span>
+                    </button>
+                    <div class="secondary-links">
+                        <a href="#buy">Buy Token</a>
+                        <a href="#community">Join Community</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-<!-- Mission Section with Enhanced Visuals -->
-<section id="mission" class="mission">
-    <div class="container">
-        <h2 class="stencil-text">The Mission: Breaking Boundaries & Challenging Expectations</h2>
-        <div class="mission-content">
-            <div class="mission-text">
-                <p>What if art didn't have to stay on Earth? What if memes weren't just digital?
-                BANKSY (Spy Booth) is here to explore what's possible when communities dream big.
-                This is a coin with a mission that's both rebellious and ambitious.</p>
-                <div class="mission-quote">
-                    <span class="quote-mark">"</span>
-                    <span class="quote-text">Breaking boundaries, one block at a time</span>
-                    <span class="quote-mark">"</span>
+
+    <section id="mission" class="mission">
+        <div class="section-background">
+            <div class="street-art-pattern"></div>
+            <div class="glow-overlay"></div>
+        </div>
+        <div class="container">
+            <h2 class="section-title">The Mission: Breaking Boundaries & Challenging Expectations</h2>
+            <div class="mission-content">
+                <div class="mission-text">
+                    <p class="graffiti-text">What if art didn't have to stay on Earth? What if memes weren't just digital?
+                    BANKSY (Spy Booth) is here to explore what's possible when communities dream big.
+                    This is a coin with a mission that's both rebellious and ambitious.</p>
+                    <div class="stencil-quote">
+                        <div class="quote-overlay"></div>
+                        <blockquote>Breaking boundaries, one block at a time</blockquote>
+                    </div>
+                </div>
+                <div class="visual-hints">
+                    <div class="hint-element rocket-hint">
+                        <div class="glow-effect"></div>
+                        <svg class="hint-rocket" viewBox="0 0 200 400">
+                            <defs>
+                                <linearGradient id="rocket-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#ef4444"/>
+                                    <stop offset="100%" stop-color="#dc2626"/>
+                                </linearGradient>
+                                <filter id="rocket-blur">
+                                    <feGaussianBlur stdDeviation="3"/>
+                                </filter>
+                            </defs>
+                            <g class="rocket-body" filter="url(#rocket-blur)">
+                                <path d="M100,50 C120,50 120,100 100,150 L100,300 L80,280 L100,50" 
+                                      fill="url(#rocket-gradient)"/>
+                                <circle cx="100" cy="100" r="15" fill="#ef4444"/>
+                                <path class="rocket-flame" d="M90,300 L110,300 L100,340 Z" fill="#dc2626">
+                                    <animate attributeName="d" 
+                                            dur="0.5s" 
+                                            repeatCount="indefinite" 
+                                            values="M90,300 L110,300 L100,340 Z;
+                                                    M90,300 L110,300 L100,320 Z;
+                                                    M90,300 L110,300 L100,340 Z"/>
+                                </path>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="hint-element figure-hint">
+                        <div class="glow-effect"></div>
+                        <svg class="hint-figure" viewBox="0 0 200 400">
+                            <defs>
+                                <filter id="figure-blur">
+                                    <feGaussianBlur stdDeviation="2"/>
+                                </filter>
+                            </defs>
+                            <path d="M100,100 Q140,120 100,180 T100,260" 
+                                  stroke="#1f2937" stroke-width="20" fill="none" 
+                                  filter="url(#figure-blur)"/>
+                        </svg>
+                    </div>
                 </div>
             </div>
-            <div class="visual-hints">
-                <!-- Enhanced Blurred Rocket SVG -->
-                <div class="hint-element rocket-hint">
-                    <svg class="blurred-rocket" viewBox="0 0 200 400">
+        </div>
+    </section>
+
+    <section id="milestones" class="milestones">
+        <div class="milestone-background">
+            <div class="connection-grid"></div>
+            <div class="glow-points"></div>
+        </div>
+        <div class="container">
+            <h2 class="section-title">What Happens Next?</h2>
+            <p class="milestone-text">BANKSY (Spy Booth) has a few milestones in mind making this a coin worth watching. 
+            Will it reach the stars? The journey is yours to decide. Keep an eye on our market cap, and maybe we'll reveal 
+            a surprise or two…</p>
+            
+            <div class="milestone-tracker">
+                <div class="progress-indicator"></div>
+                <div class="milestone-points">
+                    <div class="milestone-point" data-value="0">
+                        <div class="point-content">
+                            <div class="point-icon">
+                                <svg viewBox="0 0 40 40">
+                                    <circle cx="20" cy="20" r="18" class="point-circle"/>
+                                    <path d="M15,15 L25,25 M15,25 L25,15" class="point-symbol"/>
+                                </svg>
+                            </div>
+                            <div class="point-info">
+                                <span class="point-label">Launch</span>
+                                <span class="point-value">$0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="milestone-line"></div>
+                    <div class="milestone-point" data-value="100M">
+                        <div class="point-content">
+                            <div class="point-icon">
+                                <svg viewBox="0 0 40 40">
+                                    <circle cx="20" cy="20" r="18" class="point-circle"/>
+                                    <path d="M15,20 A5,5 0 0,1 25,20 L20,28 Z" class="point-symbol"/>
+                                </svg>
+                            </div>
+                            <div class="point-info">
+                                <span class="point-label">First Milestone</span>
+                                <span class="point-value">$100M</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="milestone-line"></div>
+                    <div class="milestone-point" data-value="1B">
+                        <div class="point-content">
+                            <div class="point-icon">
+                                <svg viewBox="0 0 40 40">
+                                    <circle cx="20" cy="20" r="18" class="point-circle"/>
+                                    <path d="M15,15 L25,25 M20,15 L20,25" class="point-symbol"/>
+                                </svg>
+                            </div>
+                            <div class="point-info">
+                                <span class="point-label">Moon Mission</span>
+                                <span class="point-value">$1B</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="different">
+        <div class="section-background">
+            <div class="graffiti-pattern"></div>
+            <div class="paint-drips"></div>
+        </div>
+        <div class="container">
+            <h2 class="section-title">Why This Coin is Different</h2>
+            <div class="different-content">
+                <p class="street-text">Inspired by a certain British street artist who just thinks outside, 
+                BANKSY (Spy Booth) is more than a coin; it's a conversation about art, 
+                freedom, and fun. With every holder, the community grows stronger. 
+                And maybe… something wild happens along the way.</p>
+                
+                <div class="street-art-container">
+                    <svg class="street-art" viewBox="0 0 800 400">
                         <defs>
-                            <filter id="rocket-blur">
-                                <feGaussianBlur stdDeviation="3"/>
-                                <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"/>
-                            </filter>
-                            <linearGradient id="rocket-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <pattern id="spray-pattern" patternUnits="userSpaceOnUse" width="40" height="40">
+                                <circle cx="20" cy="20" r="1" fill="#ffffff" opacity="0.1"/>
+                                <circle cx="10" cy="10" r="1" fill="#ffffff" opacity="0.1"/>
+                                <circle cx="30" cy="30" r="1" fill="#ffffff" opacity="0.1"/>
+                            </pattern>
+                            <linearGradient id="art-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
                                 <stop offset="0%" stop-color="#ef4444"/>
                                 <stop offset="100%" stop-color="#dc2626"/>
                             </linearGradient>
                         </defs>
-                        <!-- Enhanced rocket shape -->
-                        <g filter="url(#rocket-blur)">
-                            <path d="M100,30 C140,30 140,80 100,120 L100,350 L80,320 L100,30" 
-                                  fill="url(#rocket-gradient)"/>
-                            <circle cx="100" cy="80" r="20" fill="#ef4444"/>
-                            <path d="M85,320 L115,320 L100,350 Z" fill="#dc2626"/>
+                        
+                        <g class="art-composition">
+                            <path class="art-path" 
+                                  d="M100,200 C300,100 500,300 700,200" 
+                                  stroke="url(#art-gradient)" 
+                                  stroke-width="3" 
+                                  fill="none"/>
+                            
+                            <circle class="art-element" 
+                                    cx="300" cy="200" r="40" 
+                                    fill="url(#spray-pattern)" 
+                                    stroke="#ef4444" 
+                                    stroke-width="2"/>
+                            
+                            <path class="art-element" 
+                                  d="M500,150 L550,250 L450,250 Z" 
+                                  fill="none" 
+                                  stroke="#ef4444" 
+                                  stroke-width="2"/>
                         </g>
                     </svg>
-                    <div class="hint-glow"></div>
-                </div>
-
-                <!-- Enhanced Silhouette Figure -->
-                <div class="hint-element figure-hint">
-                    <svg class="silhouette-figure" viewBox="0 0 200 400">
-                        <defs>
-                            <filter id="figure-blur">
-                                <feGaussianBlur stdDeviation="2"/>
-                                <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"/>
-                            </filter>
-                            <linearGradient id="figure-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#1f2937"/>
-                                <stop offset="100%" stop-color="#111827"/>
-                            </linearGradient>
-                        </defs>
-                        <g filter="url(#figure-blur)">
-                            <!-- Enhanced figure silhouette -->
-                            <path d="M100,80 
-                                    C130,80 150,100 150,130
-                                    C150,160 130,180 100,180
-                                    C70,180 50,160 50,130
-                                    C50,100 70,80 100,80Z" 
-                                  fill="url(#figure-gradient)"/>
-                            <rect x="90" y="180" width="20" height="100" fill="url(#figure-gradient)"/>
-                        </g>
-                    </svg>
-                    <div class="hint-glow"></div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Enhanced Milestones Section -->
-<section id="milestones" class="milestones">
-    <div class="container">
-        <h2 class="stencil-text">What Happens Next?</h2>
-        <p class="milestone-text">BANKSY (Spy Booth) has a few milestones in mind making this a coin worth watching. 
-        Will it reach the stars? The journey is yours to decide. Keep an eye on our market cap, and maybe we'll reveal 
-        a surprise or two…</p>
-        
-        <div class="milestone-tracker">
-            <div class="timeline-container">
-                <svg class="timeline" viewBox="0 0 800 200">
-                    <defs>
-                        <filter id="glow">
-                            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                            <feMerge>
-                                <feMergeNode in="coloredBlur"/>
-                                <feMergeNode in="SourceGraphic"/>
-                            </feMerge>
-                        </filter>
-                        <linearGradient id="line-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="#ef4444"/>
-                            <stop offset="100%" stop-color="#dc2626"/>
-                        </linearGradient>
-                    </defs>
+    <section id="community" class="community">
+        <div class="section-background">
+            <div class="network-pattern"></div>
+            <div class="glow-lines"></div>
+        </div>
+        <div class="container">
+            <h2 class="section-title">Join the Community</h2>
+            <div class="social-links">
+                <a href="#" class="social-button twitter">
+                    <div class="button-content">
+                        <div class="icon-wrapper">
+                            <svg viewBox="0 0 24 24" class="social-icon">
+                                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+                            </svg>
+                            <div class="icon-glow"></div>
+                        </div>
+                        <div class="text-content">
+                            <span class="platform">Twitter</span>
+                            <span class="teaser">Banksy's art in... space?</span>
+                        </div>
+                    </div>
+                </a>
 
-                    <!-- Timeline base -->
-                    <line x1="50" y1="100" x2="750" y2="100" 
-                          stroke="url(#line-gradient)" stroke-width="2" filter="url(#glow)"/>
+                <a href="#" class="social-button reddit">
+                    <div class="button-content">
+                        <div class="icon-wrapper">
+                            <svg viewBox="0 0 24 24" class="social-icon">
+                                <circle cx="12" cy="12" r="9"/>
+                                <circle cx="8" cy="9" r="1.5"/>
+                                <circle cx="16" cy="9" r="1.5"/>
+                                <path d="M6,13 C8,15 16,15 18,13"/>
+                            </svg>
+                            <div class="icon-glow"></div>
+                        </div>
+                        <div class="text-content">
+                            <span class="platform">Reddit</span>
+                            <span class="teaser">What happens at $100M?</span>
+                        </div>
+                    </div>
+                </a>
 
-                    <!-- Enhanced milestone points -->
-                    <g class="milestone-point" data-value="0">
-                        <circle cx="50" cy="100" r="15" class="point-outer"/>
-                        <circle cx="50" cy="100" r="8" class="point-inner"/>
-                        <text x="50" y="140" class="milestone-label">Launch</text>
-                        <text x="50" y="160" class="milestone-value">$0</text>
-                    </g>
-
-                    <g class="milestone-point" data-value="100M">
-                        <circle cx="400" cy="100" r="15" class="point-outer"/>
-                        <circle cx="400" cy="100" r="8" class="point-inner"/>
-                        <text x="400" y="140" class="milestone-label">First Milestone</text>
-                        <text x="400" y="160" class="milestone-value">$100M</text>
-                    </g>
-
-                    <g class="milestone-point" data-value="1B">
-                        <circle cx="750" cy="100" r="15" class="point-outer"/>
-                        <circle cx="750" cy="100" r="8" class="point-inner"/>
-                        <text x="750" y="140" class="milestone-label">Moon Mission</text>
-                        <text x="750" y="160" class="milestone-value">$1B</text>
-                    </g>
-                </svg>
+                <a href="#" class="social-button telegram">
+                    <div class="button-content">
+                        <div class="icon-wrapper">
+                            <svg viewBox="0 0 24 24" class="social-icon">
+                                <path d="M21.5,2L2.5,9.5L9,12L12,20L21.5,2Z"/>
+                            </svg>
+                            <div class="icon-glow"></div>
+                        </div>
+                        <div class="text-content">
+                            <span class="platform">Telegram</span>
+                            <span class="teaser">Join the movement</span>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Enhanced Different Section -->
-<section class="different">
-    <div class="container">
-        <h2 class="stencil-text">Why This Coin is Different</h2>
-        <div class="different-content">
-            <p>Inspired by a certain British street artist who just thinks outside, 
-            BANKSY (Spy Booth) is more than a coin; it's a conversation about art, 
-            freedom, and fun. With every holder, the community grows stronger. 
-            And maybe… something wild happens along the way.</p>
-            
-            <!-- Enhanced street art elements -->
-            <div class="street-art-elements">
-                <svg class="street-art" viewBox="0 0 800 300">
-                    <defs>
-                        <pattern id="spray-texture" patternUnits="userSpaceOnUse" width="40" height="40">
-                            <circle cx="20" cy="20" r="1" fill="#ffffff" opacity="0.1"/>
-                            <circle cx="10" cy="10" r="1" fill="#ffffff" opacity="0.1"/>
-                            <circle cx="30" cy="30" r="1" fill="#ffffff" opacity="0.1"/>
-                        </pattern>
-                        <filter id="street-blur">
-                            <feGaussianBlur stdDeviation="1.5"/>
-                        </filter>
-                    </defs>
-                    
-                    <!-- Enhanced street art graphics -->
-                    <g class="street-art-group">
-                        <path class="art-path" 
-                              d="M100,150 C200,50 400,50 500,150 S700,250 800,150" 
-                              stroke="#ef4444" stroke-width="3" fill="none"/>
-                        
-                        <circle class="art-circle" cx="300" cy="150" r="50" 
-                                fill="url(#spray-texture)" stroke="#ef4444" stroke-width="2"/>
-                        
-                        <path class="art-symbol" 
-                              d="M600,100 L650,200 L550,200 Z" 
-                              fill="none" stroke="#ef4444" stroke-width="2"/>
-                    </g>
-                </svg>
-            </div>
+    <footer class="footer">
+        <div class="footer-background">
+            <div class="spray-overlay"></div>
+            <div class="pattern-overlay"></div>
         </div>
-    </div>
-</section>
-
-<!-- Enhanced Community Section -->
-<section id="community" class="community">
-    <div class="container">
-        <h2 class="stencil-text">Join the Community</h2>
-        <div class="social-links">
-            <!-- Enhanced Twitter Button -->
-            <a href="#" class="social-button twitter">
-                <div class="button-content">
-                    <svg class="social-icon" viewBox="0 0 24 24">
-                        <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" 
-                              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                    <div class="social-text">
-                        <span class="platform">Twitter</span>
-                        <span class="teaser">Banksy's art in... space?</span>
-                    </div>
-                </div>
-                <div class="button-glow"></div>
-            </a>
-
-            <!-- Enhanced Reddit Button -->
-            <a href="#" class="social-button reddit">
-                <div class="button-content">
-                    <svg class="social-icon" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
-                        <circle cx="8" cy="9" r="1.5" fill="currentColor"/>
-                        <circle cx="16" cy="9" r="1.5" fill="currentColor"/>
-                        <path d="M6,13 C8,15 16,15 18,13" fill="none" stroke="currentColor" stroke-width="2"/>
-                    </svg>
-                    <div class="social-text">
-                        <span class="platform">Reddit</span>
-                        <span class="teaser">What happens at $100M?</span>
-                    </div>
-                </div>
-                <div class="button-glow"></div>
-            </a>
-
-            <!-- Enhanced Telegram Button -->
-            <a href="#" class="social-button telegram">
-                <div class="button-content">
-                    <svg class="social-icon" viewBox="0 0 24 24">
-                        <path d="M21.5,2L2.5,9.5L9,12L12,20L21.5,2Z" 
-                              fill="none" stroke="currentColor" stroke-width="2"/>
-                    </svg>
-                    <div class="social-text">
-                        <span class="platform">Telegram</span>
-                        <span class="teaser">Join the movement</span>
-                    </div>
-                </div>
-                <div class="button-glow"></div>
-            </a>
+        <div class="container">
+            <h3 class="section-title">For the Fun of It</h3>
+            <p class="footer-text">BANKSY (Spy Booth) is a speculative, community-driven project.
+            We make no promises of profit or investment. This is about creating
+            a fun, art-inspired experience for those who enjoy the thrill of
+            watching something big unfold.</p>
         </div>
-    </div>
-</section>
+    </footer>
 
-<!-- Enhanced Footer -->
-<footer>
-    <div class="container">
-        <h3 class="stencil-text">For the Fun of It</h3>
-        <p>BANKSY (Spy Booth) is a speculative, community-driven project.
-        We make no promises of profit or investment. This is about creating
-        a fun, art-inspired experience for those who enjoy the thrill of
-        watching something big unfold.</p>
-    </div>
-</footer>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

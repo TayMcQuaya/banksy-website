@@ -1,208 +1,231 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Navbar scroll effect
+    // Performance checks
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let isScrolling = false;
+    let isResizing = false;
+
+    // Enhanced Intersection Observer
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15
+    };
+
+    const animationObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                
+                // Trigger street art animation when visible
+                if (entry.target.classList.contains('art-composition')) {
+                    resetAndTriggerArtAnimation(entry.target);
+                }
+            }
+        });
+    }, observerOptions);
+
+    // Observe all animated elements
+    document.querySelectorAll('.fade-in, .mission-text, .milestone-text, .street-text, .art-composition, .graffiti-text')
+        .forEach(element => animationObserver.observe(element));
+
+    // Enhanced Navbar
     const navbar = document.querySelector('.navbar');
-    let lastScroll = 0;
+    let lastScrollPosition = window.pageYOffset;
 
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-        
-        if (currentScroll <= 0) {
-            navbar.classList.remove('scrolled');
-            return;
+    function handleScroll() {
+        if (!isScrolling) {
+            requestAnimationFrame(() => {
+                const currentScroll = window.pageYOffset;
+                
+                if (currentScroll <= 0) {
+                    navbar.classList.remove('scrolled');
+                } else {
+                    navbar.classList.add('scrolled');
+                }
+
+                lastScrollPosition = currentScroll;
+                isScrolling = false;
+            });
         }
+        isScrolling = true;
+    }
 
-        if (currentScroll > lastScroll && !navbar.classList.contains('scrolled')) {
-            // Scroll down
-            navbar.classList.add('scrolled');
-        } else if (currentScroll < lastScroll && navbar.classList.contains('scrolled')) {
-            // Scroll up
-            navbar.classList.remove('scrolled');
-        }
-        lastScroll = currentScroll;
-    });
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
-    // Smooth scroll for navigation with offset
+    // Enhanced Smooth Scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+        anchor.addEventListener('click', function(e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
-            const offset = 100; // Offset for fixed header
-            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+            if (!target) return;
+
+            const navbarHeight = navbar.offsetHeight;
+            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
+            const offsetPosition = targetPosition - navbarHeight - 20;
 
             window.scrollTo({
-                top: targetPosition,
+                top: offsetPosition,
                 behavior: 'smooth'
             });
         });
     });
 
-    // Enhanced button effects
-    const buttons = document.querySelectorAll('.cta-button, .social-button');
-    
-    buttons.forEach(button => {
-        button.addEventListener('mouseenter', function(e) {
-            const effect = this.querySelector('.button-effect');
-            if (effect) {
-                const rect = this.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                effect.style.left = `${x}px`;
-                effect.style.top = `${y}px`;
-            }
-        });
-    });
-
-    // Milestone interaction enhancement
-    const milestonePoints = document.querySelectorAll('.milestone-point');
-    let activeMilestone = null;
-
-    milestonePoints.forEach(point => {
-        point.addEventListener('mouseenter', function(e) {
-            if (activeMilestone !== this) {
-                // Reset previous active milestone
-                if (activeMilestone) {
-                    activeMilestone.style.transform = 'translateY(0)';
-                }
-                
-                // Smooth transition for new active milestone
-                this.style.transform = 'translateY(-5px)';
-                activeMilestone = this;
-            }
-        });
-
-        point.addEventListener('mouseleave', function(e) {
-            this.style.transform = 'translateY(0)';
-            activeMilestone = null;
-        });
-    });
-
-    // Scroll-triggered animations
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
-
-    const observerCallback = (entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // Only animate once
-            }
-        });
-    };
-
-    const scrollObserver = new IntersectionObserver(observerCallback, observerOptions);
-
-    // Observe elements with fade-in class
-    document.querySelectorAll('.fade-in').forEach(element => {
-        scrollObserver.observe(element);
-    });
-
-    // Floating artwork parallax effect
+    // Enhanced Floating Artwork Parallax
     const floatingArtwork = document.querySelector('.floating-artwork');
-    
+    let parallaxTimeout;
+
+    function handleParallax(e) {
+        if (prefersReducedMotion) return;
+        
+        if (!parallaxTimeout) {
+            parallaxTimeout = requestAnimationFrame(() => {
+                const { clientX, clientY } = e;
+                const { innerWidth, innerHeight } = window;
+                
+                const moveX = (clientX - innerWidth / 2) / innerWidth * 15;
+                const moveY = (clientY - innerHeight / 2) / innerHeight * 15;
+                
+                floatingArtwork.style.transform = `translate(${moveX}px, ${moveY}px)`;
+                parallaxTimeout = null;
+            });
+        }
+    }
+
     if (floatingArtwork) {
-        window.addEventListener('mousemove', (e) => {
-            const { clientX, clientY } = e;
-            const { innerWidth, innerHeight } = window;
+        window.addEventListener('mousemove', handleParallax, { passive: true });
+    }
+
+    // Enhanced Button Effects
+    document.querySelectorAll('.cta-button').forEach(button => {
+        button.addEventListener('mousemove', (e) => {
+            const rect = button.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
             
-            const moveX = (clientX - innerWidth / 2) / innerWidth * 20;
-            const moveY = (clientY - innerHeight / 2) / innerHeight * 20;
-            
-            floatingArtwork.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            button.style.setProperty('--mouse-x', `${x}%`);
+            button.style.setProperty('--mouse-y', `${y}%`);
+        });
+    });
+
+    // Enhanced Milestone Timeline
+    const milestonePoints = document.querySelectorAll('.milestone-point');
+    const milestoneLines = document.querySelectorAll('.milestone-line');
+    let currentMilestone = null;
+
+    function updateMilestoneProgress(target) {
+        const points = Array.from(milestonePoints);
+        const index = points.indexOf(target);
+        
+        milestoneLines.forEach((line, i) => {
+            if (i < index) {
+                line.style.opacity = '1';
+                line.style.background = 'var(--gradient-primary)';
+            } else {
+                line.style.opacity = '0.3';
+                line.style.background = 'var(--color-primary)';
+            }
         });
     }
 
-    // Text glitch effect
-    const glitchTexts = document.querySelectorAll('.stencil-text');
-    
-    function triggerGlitch(element) {
-        const duration = 50 + Math.random() * 100;
-        const delay = Math.random() * 5000;
-        
-        setTimeout(() => {
-            element.style.transform = `translate(${(Math.random() - 0.5) * 10}px, ${(Math.random() - 0.5) * 10}px)`;
+    milestonePoints.forEach((point, index) => {
+        point.addEventListener('mouseenter', function() {
+            if (currentMilestone === this) return;
             
-            setTimeout(() => {
-                element.style.transform = 'translate(0, 0)';
-                triggerGlitch(element);
-            }, duration);
-        }, delay);
-    }
+            // Reset previous milestone
+            if (currentMilestone) {
+                currentMilestone.style.transform = '';
+            }
 
-    glitchTexts.forEach(text => {
-        text.style.transition = 'transform 50ms';
-        triggerGlitch(text);
+            // Update current milestone
+            this.style.transform = 'translateY(-5px)';
+            currentMilestone = this;
+            
+            // Update progress visualization
+            updateMilestoneProgress(this);
+
+            // Add ripple effect
+            const ripple = document.createElement('div');
+            ripple.className = 'milestone-ripple';
+            this.appendChild(ripple);
+            
+            ripple.addEventListener('animationend', () => ripple.remove());
+        });
+
+        point.addEventListener('mouseleave', function() {
+            this.style.transform = '';
+            currentMilestone = null;
+        });
     });
 
-    // Enhanced social button interactions
-    const socialButtons = document.querySelectorAll('.social-button');
-    
-    socialButtons.forEach(button => {
-        button.addEventListener('mouseenter', function() {
-            const glow = this.querySelector('.button-glow');
-            if (glow) {
-                glow.style.opacity = '1';
-                this.style.transform = 'translateY(-5px)';
+    // Enhanced Street Art Animation
+    function resetAndTriggerArtAnimation(element) {
+        const paths = element.querySelectorAll('.art-path, .art-element');
+        
+        paths.forEach(path => {
+            path.style.animation = 'none';
+            path.offsetHeight; // Force reflow
+            
+            if (path.classList.contains('art-path')) {
+                path.style.animation = 'drawPath 3s ease forwards';
+            } else {
+                path.style.animation = 'fadeInScale 1s ease forwards 0.5s';
             }
+        });
+    }
+
+    // Enhanced Social Button Interaction
+    document.querySelectorAll('.social-button').forEach(button => {
+        button.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
         });
 
         button.addEventListener('mouseleave', function() {
-            const glow = this.querySelector('.button-glow');
-            if (glow) {
-                glow.style.opacity = '0';
-                this.style.transform = 'translateY(0)';
-            }
+            this.style.transform = '';
         });
     });
 
-    // Performance optimization for star animation
-    const starsContainer = document.querySelector('.stars-container');
-    let isVisible = true;
+    // Optimized Background Effects
+    const spaceEnvironment = document.querySelector('.space-environment');
+    let ticking = false;
 
-    const optimizeStars = () => {
-        if (window.scrollY > window.innerHeight && isVisible) {
-            starsContainer.style.display = 'none';
-            isVisible = false;
-        } else if (window.scrollY <= window.innerHeight && !isVisible) {
-            starsContainer.style.display = 'block';
-            isVisible = true;
+    function optimizeBackground() {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                const scrolled = window.pageYOffset;
+                const opacity = Math.max(0, 1 - (scrolled / window.innerHeight));
+                
+                if (spaceEnvironment) {
+                    spaceEnvironment.style.opacity = opacity;
+                }
+                
+                ticking = false;
+            });
+            ticking = true;
         }
-    };
+    }
 
-    // Throttle scroll event for better performance
-    let scrollTimeout;
-    window.addEventListener('scroll', () => {
-        if (!scrollTimeout) {
-            scrollTimeout = setTimeout(() => {
-                optimizeStars();
-                scrollTimeout = null;
-            }, 100);
+    window.addEventListener('scroll', optimizeBackground, { passive: true });
+
+    // Initial visibility check
+    function checkInitialVisibility() {
+        document.querySelectorAll('.fade-in').forEach(element => {
+            const rect = element.getBoundingClientRect();
+            if (rect.top < window.innerHeight) {
+                element.classList.add('visible');
+            }
+        });
+    }
+
+    checkInitialVisibility();
+
+    // Resize handler
+    window.addEventListener('resize', () => {
+        if (!isResizing) {
+            requestAnimationFrame(() => {
+                checkInitialVisibility();
+                isResizing = false;
+            });
+            isResizing = true;
         }
-    });
-
-    // Handle mobile touch interactions
-    let touchStartY;
-    
-    document.addEventListener('touchstart', e => {
-        touchStartY = e.touches[0].clientY;
-    });
-
-    document.addEventListener('touchmove', e => {
-        if (!touchStartY) return;
-
-        const touchY = e.touches[0].clientY;
-        const diff = touchStartY - touchY;
-
-        // Add scrolled class to navbar on mobile scroll
-        if (Math.abs(diff) > 5) {
-            navbar.classList.add('scrolled');
-        }
-    });
-
-    document.addEventListener('touchend', () => {
-        touchStartY = null;
-    });
+    }, { passive: true });
 });
