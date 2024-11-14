@@ -1,231 +1,202 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Performance checks
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let isScrolling = false;
-    let isResizing = false;
+    // Enhanced Starfield Animation
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
 
-    // Enhanced Intersection Observer
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.15
-    };
-
-    const animationObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                
-                // Trigger street art animation when visible
-                if (entry.target.classList.contains('art-composition')) {
-                    resetAndTriggerArtAnimation(entry.target);
-                }
-            }
-        });
-    }, observerOptions);
-
-    // Observe all animated elements
-    document.querySelectorAll('.fade-in, .mission-text, .milestone-text, .street-text, .art-composition, .graffiti-text')
-        .forEach(element => animationObserver.observe(element));
-
-    // Enhanced Navbar
-    const navbar = document.querySelector('.navbar');
-    let lastScrollPosition = window.pageYOffset;
-
-    function handleScroll() {
-        if (!isScrolling) {
-            requestAnimationFrame(() => {
-                const currentScroll = window.pageYOffset;
-                
-                if (currentScroll <= 0) {
-                    navbar.classList.remove('scrolled');
-                } else {
-                    navbar.classList.add('scrolled');
-                }
-
-                lastScrollPosition = currentScroll;
-                isScrolling = false;
-            });
-        }
-        isScrolling = true;
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
     }
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 
-    // Enhanced Smooth Scroll
+    // Create stars with enhanced properties
+    const stars = Array(400).fill().map(() => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2,
+        speed: Math.random() * 3 + 1,
+        brightness: Math.random(),
+        color: `rgba(${155 + Math.random() * 100}, ${155 + Math.random() * 100}, 255, 1)`
+    }));
+
+    // Draw stars with enhanced visual effects
+    function drawStars() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        stars.forEach(star => {
+            const opacity = 0.5 + star.brightness * 0.5;
+            ctx.fillStyle = star.color;
+            ctx.shadowBlur = star.size * 2;
+            ctx.shadowColor = star.color;
+            ctx.beginPath();
+            ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+            ctx.fill();
+        });
+    }
+
+    // Move stars with parallax effect
+    function moveStars() {
+        stars.forEach(star => {
+            star.y += star.speed;
+            if (star.y > canvas.height) {
+                star.y = 0;
+                star.x = Math.random() * canvas.width;
+            }
+            // Oscillating brightness
+            star.brightness = Math.sin(Date.now() / 1000 + star.speed);
+        });
+    }
+
+    function animate() {
+        drawStars();
+        moveStars();
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    // Enhanced Rocket Animation with Scroll Effects
+    const rocket = document.querySelector('.rocket-container');
+    let lastScrollTop = 0;
+    let rocketRotation = 0;
+    let scrollVelocity = 0;
+    let lastScrollPosition = window.pageYOffset;
+    let lastScrollTime = Date.now();
+
+    window.addEventListener('scroll', () => {
+        const currentTime = Date.now();
+        const timeDelta = currentTime - lastScrollTime;
+        const currentScrollPosition = window.pageYOffset;
+        
+        // Calculate scroll velocity
+        if (timeDelta > 0) {
+            scrollVelocity = (currentScrollPosition - lastScrollPosition) / timeDelta;
+        }
+
+        // Smooth rotation based on scroll velocity
+        const targetRotation = Math.max(Math.min(scrollVelocity * 1000, 30), -30);
+        rocketRotation += (targetRotation - rocketRotation) * 0.1;
+
+        // Apply transformations
+        rocket.style.transform = `
+            translateY(${-currentScrollPosition * 0.5}px) 
+            rotate(${rocketRotation}deg)
+            scale(${1 + Math.abs(scrollVelocity)})
+        `;
+
+        // Update flame effect based on scroll velocity
+        const flames = document.querySelectorAll('.flame-inner, .flame-outer');
+        flames.forEach(flame => {
+            flame.style.height = `${80 + Math.abs(scrollVelocity) * 1000}px`;
+        });
+
+        lastScrollPosition = currentScrollPosition;
+        lastScrollTime = currentTime;
+    });
+
+    // Enhanced Navbar Animation
+    const navbar = document.querySelector('.navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+            navbar.style.transform = 'translateY(0)';
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // Smooth Scrolling with Enhanced Easing
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
-            if (!target) return;
+            if (target) {
+                const headerOffset = 80;
+                const elementPosition = target.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-            const navbarHeight = navbar.offsetHeight;
-            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
-            const offsetPosition = targetPosition - navbarHeight - 20;
-
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
         });
     });
 
-    // Enhanced Floating Artwork Parallax
-    const floatingArtwork = document.querySelector('.floating-artwork');
-    let parallaxTimeout;
+    // Enhanced Section Animations with Intersection Observer
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
 
-    function handleParallax(e) {
-        if (prefersReducedMotion) return;
-        
-        if (!parallaxTimeout) {
-            parallaxTimeout = requestAnimationFrame(() => {
-                const { clientX, clientY } = e;
-                const { innerWidth, innerHeight } = window;
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
                 
-                const moveX = (clientX - innerWidth / 2) / innerWidth * 15;
-                const moveY = (clientY - innerHeight / 2) / innerHeight * 15;
-                
-                floatingArtwork.style.transform = `translate(${moveX}px, ${moveY}px)`;
-                parallaxTimeout = null;
-            });
+                // Animate progress bars with sequential timing
+                const progressBars = entry.target.querySelectorAll('.progress');
+                progressBars.forEach((bar, index) => {
+                    const width = bar.style.width;
+                    bar.style.width = '0';
+                    setTimeout(() => {
+                        bar.style.width = width;
+                        bar.style.transition = 'width 1.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                    }, index * 200);
+                });
+
+                // Add floating animation to cards
+                const cards = entry.target.querySelectorAll('.milestone-card, .feature-card');
+                cards.forEach((card, index) => {
+                    card.style.animation = `floating 3s ease-in-out ${index * 0.2}s infinite`;
+                });
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.section').forEach(section => {
+        observer.observe(section);
+    });
+
+    // Enhanced Glitch Effect for Hero Title
+    const glitchText = document.querySelector('.glitch');
+    if (glitchText) {
+        let glitchInterval;
+
+        function triggerGlitch() {
+            glitchText.style.animation = 'none';
+            void glitchText.offsetWidth;
+            glitchText.style.animation = null;
+
+            // Random timing for next glitch
+            clearInterval(glitchInterval);
+            glitchInterval = setTimeout(triggerGlitch, 2000 + Math.random() * 3000);
         }
+
+        triggerGlitch();
     }
 
-    if (floatingArtwork) {
-        window.addEventListener('mousemove', handleParallax, { passive: true });
-    }
-
-    // Enhanced Button Effects
-    document.querySelectorAll('.cta-button').forEach(button => {
-        button.addEventListener('mousemove', (e) => {
-            const rect = button.getBoundingClientRect();
-            const x = ((e.clientX - rect.left) / rect.width) * 100;
-            const y = ((e.clientY - rect.top) / rect.height) * 100;
-            
-            button.style.setProperty('--mouse-x', `${x}%`);
-            button.style.setProperty('--mouse-y', `${y}%`);
-        });
+    // Window resize handler
+    window.addEventListener('resize', () => {
+        resizeCanvas();
     });
 
-    // Enhanced Milestone Timeline
-    const milestonePoints = document.querySelectorAll('.milestone-point');
-    const milestoneLines = document.querySelectorAll('.milestone-line');
-    let currentMilestone = null;
-
-    function updateMilestoneProgress(target) {
-        const points = Array.from(milestonePoints);
-        const index = points.indexOf(target);
-        
-        milestoneLines.forEach((line, i) => {
-            if (i < index) {
-                line.style.opacity = '1';
-                line.style.background = 'var(--gradient-primary)';
-            } else {
-                line.style.opacity = '0.3';
-                line.style.background = 'var(--color-primary)';
-            }
-        });
-    }
-
-    milestonePoints.forEach((point, index) => {
-        point.addEventListener('mouseenter', function() {
-            if (currentMilestone === this) return;
+    // Add particle effects to buttons
+    document.querySelectorAll('.cyber-button').forEach(button => {
+        button.addEventListener('mouseover', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
             
-            // Reset previous milestone
-            if (currentMilestone) {
-                currentMilestone.style.transform = '';
-            }
-
-            // Update current milestone
-            this.style.transform = 'translateY(-5px)';
-            currentMilestone = this;
-            
-            // Update progress visualization
-            updateMilestoneProgress(this);
-
-            // Add ripple effect
             const ripple = document.createElement('div');
-            ripple.className = 'milestone-ripple';
+            ripple.classList.add('ripple');
+            ripple.style.left = `${x}px`;
+            ripple.style.top = `${y}px`;
+            
             this.appendChild(ripple);
             
-            ripple.addEventListener('animationend', () => ripple.remove());
-        });
-
-        point.addEventListener('mouseleave', function() {
-            this.style.transform = '';
-            currentMilestone = null;
+            setTimeout(() => ripple.remove(), 1000);
         });
     });
-
-    // Enhanced Street Art Animation
-    function resetAndTriggerArtAnimation(element) {
-        const paths = element.querySelectorAll('.art-path, .art-element');
-        
-        paths.forEach(path => {
-            path.style.animation = 'none';
-            path.offsetHeight; // Force reflow
-            
-            if (path.classList.contains('art-path')) {
-                path.style.animation = 'drawPath 3s ease forwards';
-            } else {
-                path.style.animation = 'fadeInScale 1s ease forwards 0.5s';
-            }
-        });
-    }
-
-    // Enhanced Social Button Interaction
-    document.querySelectorAll('.social-button').forEach(button => {
-        button.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-5px)';
-        });
-
-        button.addEventListener('mouseleave', function() {
-            this.style.transform = '';
-        });
-    });
-
-    // Optimized Background Effects
-    const spaceEnvironment = document.querySelector('.space-environment');
-    let ticking = false;
-
-    function optimizeBackground() {
-        if (!ticking) {
-            requestAnimationFrame(() => {
-                const scrolled = window.pageYOffset;
-                const opacity = Math.max(0, 1 - (scrolled / window.innerHeight));
-                
-                if (spaceEnvironment) {
-                    spaceEnvironment.style.opacity = opacity;
-                }
-                
-                ticking = false;
-            });
-            ticking = true;
-        }
-    }
-
-    window.addEventListener('scroll', optimizeBackground, { passive: true });
-
-    // Initial visibility check
-    function checkInitialVisibility() {
-        document.querySelectorAll('.fade-in').forEach(element => {
-            const rect = element.getBoundingClientRect();
-            if (rect.top < window.innerHeight) {
-                element.classList.add('visible');
-            }
-        });
-    }
-
-    checkInitialVisibility();
-
-    // Resize handler
-    window.addEventListener('resize', () => {
-        if (!isResizing) {
-            requestAnimationFrame(() => {
-                checkInitialVisibility();
-                isResizing = false;
-            });
-            isResizing = true;
-        }
-    }, { passive: true });
 });

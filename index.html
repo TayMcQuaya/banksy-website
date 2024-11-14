@@ -3,249 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BANKSY→SPACE</title>
+    <title>BANKSY-TO-THE-MOON</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.cdnfonts.com/css/tag" rel="stylesheet">
+    <script src="script.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="space-environment">
-        <div class="stars-container">
-            <div class="stars-wrapper">
-                <div class="stars"></div>
-                <div class="stars"></div>
-            </div>
-            <div class="stars-wrapper">
-                <div class="stars2"></div>
-                <div class="stars2"></div>
-            </div>
-            <div class="stars-wrapper">
-                <div class="stars3"></div>
-                <div class="stars3"></div>
+    <div class="galactic-background">
+        <canvas id="starfield"></canvas>
+        <div class="rocket-container">
+            <div class="rocket">
+                <div class="rocket-head"></div>
+                <div class="rocket-body">
+                    <div class="window">
+                        <div class="window-reflection"></div>
+                    </div>
+                </div>
+                <div class="fins">
+                    <div class="fin left"></div>
+                    <div class="fin right"></div>
+                </div>
+                <div class="exhaust">
+                    <div class="flame-inner"></div>
+                    <div class="flame-outer"></div>
+                    <div class="particles"></div>
+                </div>
             </div>
         </div>
-        <div class="nebula-effect"></div>
-        <div class="space-particles"></div>
     </div>
 
     <nav class="navbar">
         <div class="container">
-            <div class="logo-container">
-                <div class="logo">BANKSY→SPACE</div>
-            </div>
+            <div class="logo">🚀 BANKSY-TO-THE-MOON</div>
+            <ul class="nav-links">
+                <li><a href="#mission" class="glowing-link">Mission</a></li>
+                <li><a href="#milestones" class="glowing-link">Milestones</a></li>
+                <li><a href="#different" class="glowing-link">Why Different?</a></li>
+                <li><a href="#community" class="glowing-link">Community</a></li>
+                <li><a href="#buy" class="glowing-link cta">Buy Now</a></li>
+            </ul>
         </div>
     </nav>
 
     <section class="hero">
-        <div class="hero-background">
-            <div class="street-art-overlay"></div>
-            <div class="space-glow"></div>
-        </div>
-        <div class="hero-content-wrapper">
-            <div class="hero-content">
-                <h1 class="stencil-text">
-                    <span class="text-line-1">sending a Banksy into deep space</span>
-                </h1>
-                <p class="subheadline">BANKSY(Spy Booth)</p>
-                <div class="cta-container">
-                    <div class="secondary-links">
-                        <a href="#buy">Buy Token</a>
-                        <a href="#community">Join tg</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="mission" class="mission">
-        <div class="section-background"></div> <!-- Background image for Mission Section -->
-        <div class="container">
-            <h2 class="section-title">The Mission: Breaking Boundaries & Challenging Expectations</h2>
-            <div class="mission-content">
-                <div class="mission-text">
-                    <p class="graffiti-text">What if art didn't have to stay on Earth? What if memes weren't just digital?
-                    BANKSY (Spy Booth) is here to explore what's possible when communities dream big.</p>
-                    <div class="stencil-quote">
-                        <div class="quote-overlay"></div>
-                        <blockquote>Breaking boundaries, one block at a time</blockquote>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="milestones" class="milestones">
-        <div class="milestone-background"></div> <!-- Background image for Milestones Section -->
-        <div class="container">
-            <h2 class="section-title">What Happens Next?</h2>
-            <p class="milestone-text">BANKSY (Spy Booth) has a few milestones in mind making this a coin worth watching. 
-            Will it reach the stars? The journey is yours to decide. Keep an eye on our market cap, and maybe we'll reveal 
-            a surprise or two…</p>
-            
-            <div class="milestone-tracker">
-                <div class="progress-indicator"></div>
-                <div class="milestone-points">
-                    <div class="milestone-point" data-value="0">
-                        <div class="point-content">
-                            <div class="point-icon">
-                                <svg viewBox="0 0 40 40">
-                                    <circle cx="20" cy="20" r="18" class="point-circle"/>
-                                    <path d="M15,15 L25,25 M15,25 L25,15" class="point-symbol"/>
-                                </svg>
-                            </div>
-                            <div class="point-info">
-                                <span class="point-label">Launch</span>
-                                <span class="point-value">$0</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="milestone-line"></div>
-                    <div class="milestone-point" data-value="100M">
-                        <div class="point-content">
-                            <div class="point-icon">
-                                <svg viewBox="0 0 40 40">
-                                    <circle cx="20" cy="20" r="18" class="point-circle"/>
-                                    <path d="M15,20 A5,5 0 0,1 25,20 L20,28 Z" class="point-symbol"/>
-                                </svg>
-                            </div>
-                            <div class="point-info">
-                                <span class="point-label">First Milestone</span>
-                                <span class="point-value">$100M</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="milestone-line"></div>
-                    <div class="milestone-point" data-value="1B">
-                        <div class="point-content">
-                            <div class="point-icon">
-                                <svg viewBox="0 0 40 40">
-                                    <circle cx="20" cy="20" r="18" class="point-circle"/>
-                                    <path d="M15,15 L25,25 M20,15 L20,25" class="point-symbol"/>
-                                </svg>
-                            </div>
-                            <div class="point-info">
-                                <span class="point-label">Moon Mission</span>
-                                <span class="point-value">$1B</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="different">
-        <div class="section-background"></div> <!-- Background image for Different Section -->
-        <div class="container">
-            <h2 class="section-title">Why This Coin is Different</h2>
-            <div class="different-content">
-                <p class="street-text">Inspired by a certain British street artist who just thinks outside, 
-                BANKSY (Spy Booth) is more than a coin; it's a conversation about art, 
-                freedom, and fun. With every holder, the community grows stronger. 
-                And maybe… something wild happens along the way.</p>
-                
-                <div class="street-art-container">
-                    <svg class="street-art" viewBox="0 0 800 400">
-                        <defs>
-                            <pattern id="spray-pattern" patternUnits="userSpaceOnUse" width="40" height="40">
-                                <circle cx="20" cy="20" r="1" fill="#ffffff" opacity="0.1"/>
-                                <circle cx="10" cy="10" r="1" fill="#ffffff" opacity="0.1"/>
-                                <circle cx="30" cy="30" r="1" fill="#ffffff" opacity="0.1"/>
-                            </pattern>
-                            <linearGradient id="art-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" stop-color="#ef4444"/>
-                                <stop offset="100%" stop-color="#dc2626"/>
-                            </linearGradient>
-                        </defs>
-                        
-                        <g class="art-composition">
-                            <path class="art-path" 
-                                  d="M100,200 C300,100 500,300 700,200" 
-                                  stroke="url(#art-gradient)" 
-                                  stroke-width="3" 
-                                  fill="none"/>
-                            
-                            <circle class="art-element" 
-                                    cx="300" cy="200" r="40" 
-                                    fill="url(#spray-pattern)" 
-                                    stroke="#ef4444" 
-                                    stroke-width="2"/>
-                            
-                            <path class="art-element" 
-                                  d="M500,150 L550,250 L450,250 Z" 
-                                  fill="none" 
-                                  stroke="#ef4444" 
-                                  stroke-width="2"/>
-                        </g>
-                    </svg>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="community" class="community">
-        <div class="section-background"></div> <!-- Background image for Community Section -->
-        <div class="container">
-            <h2 class="section-title">Join the Community</h2>
-            <div class="social-links">
-                <a href="#" class="social-button twitter">
-                    <div class="button-content">
-                        <div class="icon-wrapper">
-                            <svg viewBox="0 0 24 24" class="social-icon">
-                                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
-                            </svg>
-                            <div class="icon-glow"></div>
-                        </div>
-                        <div class="text-content">
-                            <span class="platform">Twitter</span>
-                        </div>
-                    </div>
+        <div class="hero-content">
+            <h1 class="hero-title glitch" data-text="SENDING A BANKSY INTO DEEP SPACE">SENDING A BANKSY<br>INTO DEEP SPACE</h1>
+            <h2 class="hero-subtitle">BANKSY(Spy Booth)</h2>
+            <div class="hero-buttons">
+                <a href="#buy" class="cyber-button">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Buy Token
                 </a>
-
-                <a href="#" class="social-button reddit">
-                    <div class="button-content">
-                        <div class="icon-wrapper">
-                            <svg viewBox="0 0 24 24" class="social-icon">
-                                <circle cx="12" cy="12" r="9"/>
-                                <circle cx="8" cy="9" r="1.5"/>
-                                <circle cx="16" cy="9" r="1.5"/>
-                                <path d="M6,13 C8,15 16,15 18,13"/>
-                            </svg>
-                            <div class="icon-glow"></div>
-                        </div>
-                        <div class="text-content">
-                            <span class="platform">Reddit</span>
-                        </div>
-                    </div> 
-                </a>
-
-                <a href="#" class="social-button telegram">
-                    <div class="button-content">
-                        <div class="icon-wrapper">
-                            <svg viewBox="0 0 24 24" class="social-icon">
-                                <path d="M21.5,2L2.5,9.5L9,12L12,20L21.5,2Z"/>
-                            </svg>
-                            <div class="icon-glow"></div>
-                        </div>
-                        <div class="text-content">
-                            <span class="platform">Telegram</span>
-                        </div>
-                    </div>
+                <a href="#telegram" class="cyber-button">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Join tg
                 </a>
             </div>
+        </div>
+    </section>
+
+    <!-- Keep existing sections -->
+    <section id="mission" class="section cyberpunk">
+        <h2 class="section-title neon-text">The Mission: Breaking Boundaries & Challenging Expectations</h2>
+        <p class="section-text">What if art didn't have to stay on Earth? What if memes weren't just digital? BANKSY (Spy Booth) is here to explore what's possible when communities dream big. This is a coin with a mission that's both rebellious and ambitious.</p>
+        <div class="image-grid">
+            <div class="grid-item">
+                <img src="assets/img1.jpg" alt="Banksy artwork 1" class="grid-image">
+            </div>
+            <div class="grid-item">
+                <img src="assets/img2.jpg" alt="Banksy artwork 2" class="grid-image">
+            </div>
+            <div class="grid-item">
+                <img src="assets/img3.jpg" alt="Banksy artwork 3" class="grid-image">
+            </div>
+        </div>
+    </section>
+
+    <section id="milestones" class="section cyberpunk">
+        <h2 class="section-title neon-text">What Happens Next?</h2>
+        <p class="section-text">BANKSY (Spy Booth) has a few milestones in mind making this a coin worth watching. Will it reach the stars? The journey is yours to decide.</p>
+        <div class="milestone-cards">
+            <div class="milestone-card">
+                <div class="milestone-icon">🚀</div>
+                <h3>Launch</h3>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 100%"></div>
+                </div>
+            </div>
+            <div class="milestone-card">
+                <div class="milestone-icon">💸</div>
+                <h3>$100M Market Cap</h3>
+                <p>Meme Drop</p>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 30%"></div>
+                </div>
+            </div>
+            <div class="milestone-card">
+                <div class="milestone-icon">🌕</div>
+                <h3>$1B Market Cap</h3>
+                <p>Lunar Landing</p>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 10%"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="different" class="section cyberpunk">
+        <h2 class="section-title neon-text">Why This Coin is Different</h2>
+        <p class="section-text">Inspired by a certain British street artist who just thinks outside, BANKSY (Spy Booth) is more than a coin; it's a conversation about art, freedom, and fun. With every holder, the community grows stronger.</p>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>Art Meets DeFi</h3>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <h3>Community Driven</h3>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔥</div>
+                <h3>Degen Approved</h3>
+            </div>
+        </div>
+    </section>
+
+    <section id="community" class="section cyberpunk">
+        <h2 class="section-title neon-text">Join the Degens</h2>
+        <p class="section-text">Be part of the most chaotic and meme-worthy community in the galaxy.</p>
+        <div class="social-links">
+            <a href="#" class="social-button twitter">
+                <span class="social-icon">🐦</span>
+                Twitter
+            </a>
+            <a href="#" class="social-button reddit">
+                <span class="social-icon">👽</span>
+                Reddit
+            </a>
+            <a href="#" class="social-button telegram">
+                <span class="social-icon">📱</span>
+                Telegram
+            </a>
         </div>
     </section>
 
     <footer class="footer">
-        <div class="footer-background"></div> <!-- Background image for Footer Section -->
-        <div class="container">
-            <h3 class="section-title">For the Fun of It</h3>
-            <p class="footer-text">BANKSY (Spy Booth) is a speculative, community-driven project.
-            We make no promises of profit or investment. This is about creating
-            a fun, art-inspired experience for those who enjoy the thrill of
-            watching something big unfold.</p>
+        <div class="footer-content">
+            <p class="disclaimer">For the Fun of It: BANKSY (Spy Booth) is a speculative, community-driven project. We make no promises of profit or investment. This is about creating a fun, art-inspired experience for those who enjoy the thrill of watching something big unfold.</p>
+            <div class="footer-rocket">🚀</div>
+            <p class="trademark">© 2024 BANKSY-TO-THE-MOON. All rights reserved.</p>
         </div>
     </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>
