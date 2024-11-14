@@ -199,4 +199,23 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => ripple.remove(), 1000);
         });
     });
+
+    document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', () => {
+            const answer = question.nextElementSibling;
+            const toggle = question.querySelector('.faq-toggle');
+            
+            // Close all other answers
+            document.querySelectorAll('.faq-answer').forEach(item => {
+                if (item !== answer) {
+                    item.classList.remove('active');
+                    item.previousElementSibling.querySelector('.faq-toggle').classList.remove('active');
+                }
+            });
+    
+            // Toggle current answer
+            answer.classList.toggle('active');
+            toggle.classList.toggle('active');
+        });
+    });
 });
